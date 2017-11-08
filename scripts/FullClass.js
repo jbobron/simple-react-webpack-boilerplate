@@ -22,6 +22,11 @@ class FullClass extends React.Component {
       full class
       {title}
       <div onClick={()=>this.props.bookClass(id)}>Book!</div>
+      {this.props.booked[id] ? 
+      <div className="">booked!</div>
+      :
+      null
+      }
       </div>
     );
   }

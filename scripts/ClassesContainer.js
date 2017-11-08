@@ -12,6 +12,7 @@ class ClassesContainer extends React.Component {
       hasLoaded: false,
       isFullClassVisible: false,
       fullClassIndex: -1,
+      booked:{}
     };
     this.toggleShowFullClass = this.toggleShowFullClass.bind(this)
     this.handleToggleShowFullClass = this.handleToggleShowFullClass.bind(this)
@@ -34,17 +35,26 @@ class ClassesContainer extends React.Component {
   }
   bookClass(classId){
     let URI = "https://zenrez-interview.herokuapp.com/book-class"
-    let body = JSON.stringify({"classId": "1"})
+    let body = {
+    	"classId" :"1"
+    }
     let options = {
-      method: "PUT",
+      method: "put",
       headers: {
         'Content-Type': 'application/json',
       },
-      body: {"classId": 1}
+      body: JSON.stringify(body)
     }
     console.log(options)
     fetch(URI, options)
-    .then(resp => resp.json())
+    .then(resp => {
+      if(resp.statusText === "Created"){
+        this.state.booked[classId] = true
+        this.setState({
+          booked: this.state.booked
+        })
+      }
+    })
     .then(
       success=>{
       console.log("success!")
@@ -65,6 +75,7 @@ class ClassesContainer extends React.Component {
                 key={i}
                 handleToggleShowFullClass={()=>this.handleToggleShowFullClass(i)}
                 classData={classData}
+                booked={this.state.booked}
               />
             )
           })}
@@ -78,6 +89,7 @@ class ClassesContainer extends React.Component {
             fullClassIndex={this.state.fullClassIndex}
             toggleShowFullClass={this.toggleShowFullClass}
             bookClass={this.bookClass}
+            booked={this.state.booked}
           />
         :
         null

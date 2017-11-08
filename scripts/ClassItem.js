@@ -17,7 +17,11 @@ class ClassItem extends React.Component {
           <div>{start_time}-{end_time}</div>
         </div>
         <div style={ClassItemStyle.priceContainer}>
-          <div style={ClassItemStyle.priceNumber}>${price}</div>
+          {this.props.booked[id] ? 
+            <div style={ClassItemStyle.priceNumber}>Booked!</div>
+            :
+            <div style={ClassItemStyle.priceNumber}>${price}</div>
+          }
         </div>
       </div>
     );
