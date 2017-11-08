@@ -15,6 +15,7 @@ class ClassesContainer extends React.Component {
     };
     this.toggleShowFullClass = this.toggleShowFullClass.bind(this)
     this.handleToggleShowFullClass = this.handleToggleShowFullClass.bind(this)
+    this.bookClass = this.bookClass.bind(this)
   }
   componentDidMount() {
     let URI = "https://zenrez-interview.herokuapp.com/classes"
@@ -25,12 +26,32 @@ class ClassesContainer extends React.Component {
     })
     
   }
-
   toggleShowFullClass(i){
     this.setState({isFullClassVisible: !this.state.isFullClassVisible, fullClassIndex:i})
   }
   handleToggleShowFullClass(i){
     !this.state.isFullClassVisible ? this.toggleShowFullClass(i): null
+  }
+  bookClass(classId){
+    let URI = "https://zenrez-interview.herokuapp.com/book-class"
+    let body = JSON.stringify({"classId": "1"})
+    let options = {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {"classId": 1}
+    }
+    console.log(options)
+    fetch(URI, options)
+    .then(resp => resp.json())
+    .then(
+      success=>{
+      console.log("success!")
+      },
+      error=>{
+        console.log("error")
+      })
   }
   render() {
     return (
@@ -49,14 +70,14 @@ class ClassesContainer extends React.Component {
           })}
         </div>
         :
-        <div>Loading...</div>
+        <div style={classContainerStyle.loading}>Loading...</div>
         }
         {this.state.isFullClassVisible ? 
           <FullClass 
-            {...this.state}
-            currentClass={this.state.classes[this.state.fullClassIndex]}
+            classData={this.state.classes[this.state.fullClassIndex]}
             fullClassIndex={this.state.fullClassIndex}
             toggleShowFullClass={this.toggleShowFullClass}
+            bookClass={this.bookClass}
           />
         :
         null
@@ -67,6 +88,12 @@ class ClassesContainer extends React.Component {
 }
 
 var classContainerStyle = {
+  loading: {
+    margin: "0 auto",
+    fontSize: "36px",
+    textAlign:"center",
+    paddingTop: "50px"
+  }
 }
 
 export default ClassesContainer;

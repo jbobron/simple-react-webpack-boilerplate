@@ -10,14 +10,18 @@ class FullClass extends React.Component {
   }
 
   render() {
-
+    let {
+      img_url, available_seats, class_date, description, end_time,
+      id,instructor, price, start_time, title,
+    } = this.props.classData
     return (
       <div style={fullClassStyle.container}>
       <div style={fullClassStyle.closeButton} onClick={()=>this.props.toggleShowFullClass(this.props.fullClassIndex)}>
         X
       </div>
       full class
-      {this.props.currentClass.title}
+      {title}
+      <div onClick={()=>this.props.bookClass(id)}>Book!</div>
       </div>
     );
   }
