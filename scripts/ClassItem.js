@@ -18,7 +18,7 @@ class ClassItem extends React.Component {
         </div>
         <div style={ClassItemStyle.priceContainer}>
           {this.props.booked[id] ? 
-            <div style={ClassItemStyle.priceNumber}>Booked!</div>
+            <div style={ClassItemStyle.priceNumberBooked}>Booked!</div>
             :
             <div style={ClassItemStyle.priceNumber}>${price}</div>
           }
@@ -66,6 +66,12 @@ priceContainer: {
 },
 priceNumber: {
   backgroundColor: "#ff6260",
+  color: "white",
+  borderRadius: "16px",
+  padding:"5px 11px",
+},
+priceNumberBooked:{
+  backgroundColor: "green",
   color: "white",
   borderRadius: "16px",
   padding:"5px 11px",

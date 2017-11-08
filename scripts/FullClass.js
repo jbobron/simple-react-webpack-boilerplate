@@ -61,6 +61,7 @@ var fullClassStyle = {
   },
   img: {
     width: "50%",
+    marginBottom: "20px",
   },
   imgContainer: {
     textAlign: "center"
