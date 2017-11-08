@@ -45,7 +45,6 @@ class ClassesContainer extends React.Component {
       },
       body: JSON.stringify(body)
     }
-    console.log(options)
     fetch(URI, options)
     .then(resp => {
       if(resp.statusText === "Created"){
@@ -55,13 +54,7 @@ class ClassesContainer extends React.Component {
         })
       }
     })
-    .then(
-      success=>{
-      console.log("success!")
-      },
-      error=>{
-        console.log("error")
-      })
+
   }
   render() {
     return (
