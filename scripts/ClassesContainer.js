@@ -62,7 +62,6 @@ class ClassesContainer extends React.Component {
         {this.state.hasLoaded ? 
         <div>
           {this.state.classes.map((classData,i)=>{
-            console.log(classData)
             return (
               <ClassItem
                 key={i}
